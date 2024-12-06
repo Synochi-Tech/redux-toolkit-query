@@ -1,21 +1,20 @@
 import { Product } from "../interfaces/product";
-import { useGetProductsQuery } from "../services/dummyJson";
+import {
+  useGetProductsQuery,
+} from "../services/dummyJson";
+import ProductItem from "./ProductItem";
 
 const ProductList = () => {
-  const { data, isLoading } = useGetProductsQuery();
+  const { data: productResponse, isLoading } = useGetProductsQuery();
   return (
     <div className="product">
-      <h2 className="text-4xl em:pb-4 font-semibold pb-2">Product List</h2>
+      <h2 className="text-4xl em:pb-4 font-semibold pb-2 mb-4">Product List</h2>
       {isLoading ? (
         "Loading"
       ) : (
-        <div className="">
-          {data?.products.map(({ title, id }: Product) => {
-            return (
-              <h3 className="text-2xl pb-3" key={id}>
-                {title}
-              </h3>
-            );
+        <div className="flex justify-between flex-wrap">
+          {productResponse?.products.map((product: Product) => {
+            return <ProductItem {...product} key={product.id} />;
           })}
         </div>
       )}
