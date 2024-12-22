@@ -1,12 +1,10 @@
 import { Outlet } from "react-router";
-import Navigation from "../Components/layout/Navigation";
 import Container from "../Components/shared/Container";
 
 const RootLayout = () => {
   return (
-    <div>
-      <Navigation />
-      <Container>
+    <div className="bg-gray-50 min-h-screen flex px-10">
+      <Container className="flex-1 py-4">
         <Outlet />
       </Container>
     </div>
