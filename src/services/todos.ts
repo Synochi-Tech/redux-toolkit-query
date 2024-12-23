@@ -12,7 +12,7 @@ export const dummyAPI = createApi({
   }),
   endpoints: (builder) => ({
     getTodos: builder.query<TodosResponse, void>({
-      query: () => `products`,
+      query: () => `todos`,
     }),
   }),
 });

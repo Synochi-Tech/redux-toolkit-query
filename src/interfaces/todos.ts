@@ -12,3 +12,7 @@ export interface Todo {
   isCompleted: boolean;
   updated_at: string;
 }
+
+export interface ITodoItemProps {
+  todo: Todo
+}

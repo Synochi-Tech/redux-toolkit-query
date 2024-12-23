@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import Container from "../shared/Container";
+import Container from "../../../shared/components/Container";
 
 const Navigation = () => {
   return (

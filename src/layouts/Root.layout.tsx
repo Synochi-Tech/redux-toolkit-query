@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Container from "../Components/shared/Container";
+import Container from "../../shared/components/Container";
 
 const RootLayout = () => {
   return (
