@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TodosResponse } from "../interfaces/todos";
+import { AddTodoPayload, TodosResponse } from "../interfaces/todos";
 
 export const dummyAPI = createApi({
   reducerPath: "dummyAPI",
@@ -14,7 +14,14 @@ export const dummyAPI = createApi({
     getTodos: builder.query<TodosResponse, void>({
       query: () => `todos`,
     }),
+    addTodos: builder.mutation<TodosResponse, AddTodoPayload>({
+      query: (payload) => ({
+        url: "todos",
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useGetTodosQuery } = dummyAPI;
+export const { useGetTodosQuery, useAddTodosMutation } = dummyAPI;

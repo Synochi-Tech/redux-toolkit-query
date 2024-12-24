@@ -16,3 +16,8 @@ export interface Todo {
 export interface ITodoItemProps {
   todo: Todo
 }
+
+
+export interface AddTodoPayload {
+  title: string;
+}
