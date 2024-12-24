@@ -1,16 +1,27 @@
-import { useState } from "react";
-import { useAddTodosMutation } from "../../../services/todos";
+import { useEffect, useState } from "react";
+import { useAddTodosMutation, useGetTodosQuery } from "../../../services/todos";
 import { AddTodoPayload } from "../../../interfaces/todos";
 
 export const CreateTodo = () => {
-  const [addTodos] = useAddTodosMutation();
+  const [addTodos, { isSuccess }] = useAddTodosMutation();
   const [formFields, setFormFields] = useState<AddTodoPayload>({
     title: "",
   });
 
+  // const { refetch } = useGetTodosQuery();
+
   const isValid = (): boolean => {
     return formFields.title !== "" ? true : false;
   };
+
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setFormFields({
+  //       title: "",
+  //     });
+  //     refetch();
+  //   }
+  // }, [isSuccess]);
   return (
     <>
       <header className="px-5 py-3">
@@ -42,13 +53,17 @@ export const CreateTodo = () => {
             className={`px-4 py-2 uppercase font-sourceSans3 tracking-[3px] bg-blue-v2 rounded-xl text-white text-base ${
               isValid() ? "" : "cursor-not-allowed opacity-40"
             }`}
-            onClick={() => {
-              addTodos({
+            onClick={async () => {
+              const response = await addTodos({
                 title: formFields.title,
-              })
-              setFormFields({
-                title: "",
-              });
+              }).unwrap();
+
+              if (response.status) {
+                setFormFields({
+                  title: "",
+                });
+                // refetch();
+              }
             }}
             disabled={isValid() ? false : true}
           >

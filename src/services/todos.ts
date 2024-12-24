@@ -10,16 +10,20 @@ export const dummyAPI = createApi({
       // add Token if your API is required
     },
   }),
+  tagTypes: ["GET_TODO"],
   endpoints: (builder) => ({
     getTodos: builder.query<TodosResponse, void>({
       query: () => `todos`,
+      providesTags: ["GET_TODO"],
     }),
+
     addTodos: builder.mutation<TodosResponse, AddTodoPayload>({
       query: (payload) => ({
         url: "todos",
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["GET_TODO"],
     }),
   }),
 });
